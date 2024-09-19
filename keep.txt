@@ -1,0 +1,105 @@
+<%= title %>
+
+    <ul>
+        <% coursers.forEach(course => { %>
+            <li><%= course %></li>
+        <%}) %> 
+    </ul>  
+
+    
+//anslutning för PostgreSQL
+/*
+const { Client } = require("pg");
+require("dotenv").config();
+
+const client = new Client({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    ssl: {
+        rejectUnauthorized: false,
+    },
+});
+
+client.connect((err) =>{
+    if(err) {
+        console.log("Fel vid anslutning: " + err);
+    }else{
+        console.log("Anslutningen till databasen lyckades");
+    }
+});
+
+//skapa tabell
+client.query('
+    //DROP TABLE IF EXISTS coursers;
+    CREATE TABLE IF NOT EXISTS coursers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+    )
+');
+
+//Använder .env fil men följande innehåll 
+//PORT=3000
+//DB_HOST="mikki-databases-do-user-14636333-0.b.db.ondigitalocean.com"
+//DB_PORT=25060
+//DB_USERNAME="backend1"
+//DB_PASSWORD="AVNS_ZmknPsS52vZT4dxFgff"
+//DB_DATABASE="backend1-mf"
+
+//och npm pg
+
+*/
+
+
+//db.serialize(() => {
+    //db.run(
+    //    "DROP TABLE IF EXISTS coursers"
+    //);
+db.run(
+    `CREATE TABLE IF NOT EXISTS coursers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        code TEXT NOT NULL,
+        progression TEXT NOT NULL,
+        syllabus TEXT NOT NULL,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );`
+);
+
+db.close();
+//});
+
+/*
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "Mikaela",
+    Password: "password",
+    database: "myCoursers"
+});
+*/
+
+
+/*
+mysql NPM
+el sqlite NPM
+databasexplorer i VS code
+    */
+
+    /*
+
+console.log("databas skapad");
+
+node install
+*/
+
+/*
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+app.listen(3000);
+*/
+
+//npm run dev känner av ändringar osv 

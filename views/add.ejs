@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Kurser</title>
+    <title>Lägg till kurs</title>
 </head>
-
 <body>
-    <main id="index">
-        <h1>Kurser</h1>
+    <main id="add">
+        <h1>Lägg till kurs</h1>
         <form method="post">
-            <% if(error != ""){ %>
-                <p class="error"><%= error %></p>
-            <% } %>
             <label for="name">Kursnamn:</label><br>
             <input type="text" id="name" name="name"><br>
 

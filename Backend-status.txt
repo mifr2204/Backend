@@ -1,0 +1,83 @@
+**********************************
+SKAPA EN WEBBAPPLIKATION SOM TILLÅTER ANVÄNDARE ATT LAGRA OCH VISA KURSER DE HAR LÄST
+*************************************
+
+--------------1  Börja med att göra ett ER-diagram för din/dina tabell/tabeller. 
+2  Skapa sedan din databas via administrations-gränssnitt för databasen, eller via installations-skript (rekommenderas).
+3  Skapa en server med Node.js och Express. 
+4  Skapa sedan en webbplats med hjälp av Express och en "view engine" (t.ex. EJS eller Pug).
+	-  Skapa webbplatsen med valfri design. 
+	-  Denna ska ha ett tydligt och lättanvänt gränssnitt, som fungerar väl på stor som liten skärm med bra responsiv design 
+	-  och väl fungerande navigations-system.
+	-  Du väljer själv på vilket sätt du vill presentera dina kurser, som en tabell - eller på något annat sätt.
+ 
+*********************************************************'
+Databas
+**
+
+ansluta till en relationsdatabas för att lagra kursinformation.
+Data ska lagras i valifri relationsdatabas, som exempelvis SQLite eller 
+MySQL/MariaDb.
+
+Inlägg ska lagras i en relationsdatabas. 
+-Minst en tabell ska skapas för att lagra data. 
+-Ett förslag på hur denna tabell kan konstrueras finns nedan:
+            databas: cv
+            tabell: courses
+            ------------------------------------------------------------------------------
+            | id | coursecode | coursename | syllabus | progression  
+            ------------------------------------------------------------------------------
+I ovan förslag är det då tänkt att vardera fält ska innehålla:
+•	id - ett löpnummer som primärnyckel för respektive post
+•	coursecode - kurskod, exempelvis "DT207G"
+•	coursename - namnet på kursen, exempelvis "Backend-baserad webbutveckling"
+•	syllabus - länk till kursplanen för kursen, exempelvis "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT207G/"
+•	progression - vilken progressions kursen har (vanligtvis A eller B), exempelvis "B"
+- Använd lämpliga datatyper för ovanstående fält, och använd med fördel engelsk namngivningsstandard
+- Du kan med fördel lägga till ytterligare fält om så önskas. Datum när posten skapats är exempelsvis både användbart och lätt att lägga till.
+- Du kan se kurser i ramschemat här: https://webbutveckling.miun.se/ramschema
+- Kursplaner (och information) hittar du genom att söka rätt på respektive kurs utifrån kurskod här: https://www.miun.se/kursplaner
+
+
+**********************************************************
+Webbsida
+**
+
+Webbplatsen ska ha minst tre sidor:
+Startsida / Visa kurser - En sida som visar alla kurser som lagrats i databasen. 
+  - För varje kurs ska kurskod, kursnamn, kursplan samt kursprogression visas. 
+  - Det ska även finnas en länk för att radera kursen. (Att kunna uppdatera en kurs är valfritt att implemtera)
+Lägg till kurs - En sida med ett formulär för att lägga till en ny kurs. 
+  - Formuläret ska innehålla fälten "Kurskod", "Kursnamn", "Kursplan" och "Kursprogression". 
+  - När användaren skickar formuläret ska informationen lagras i databasen.
+  -Saknas information skall ett tydligt felmeddelande ges till användaren.
+Om sidan - En sida som beskriver webbplatsen och dess syfte, samt information om vilken databas-server som använts.
+  - Skriv även om slutsatser du dragit av uppgiften.
+
+******************************************************
+Kontroll
+***
+
+Verifiera
+
+För att uppgiften ska anses vara godkänd krävs det att:
+•	En fungerande webbplats har skapats där besökare kan se lagrade kurser samt lägga till nya.
+•	Att en databas med lämpliga tabeller har skapats, tillsammans med ett ER-digram som beksriver dess uppbyggnad.
+•	Att data för kurser lagras i databas med hjälp av SQL.
+•	Att webbplatsen skapats med korrekt HTML- och CSS-kod, samt att den är responsiv och fungerar bra på både stor och liten skärm.
+•	Källkoden ska vara väl kommenterad, och publicerad till ett Github (eller annan webbtjänst för Git) repository tillsammans med ER-diagram och export av databas/installations-skript.
+
+***************************************************
+Publicering eller video-demonstration
+**
+
+Det finns alternativ för redovisning av uppgiften:
+1.	Publicera din webbsida på publikt tillgänglig webbhost.
+Var noga med att testköra din webbplats efter publicering, och säkerställ att allting fungerar korrekt.
+2.	Skapa en video-demonstration av din lösning där du visar och berättar hur denna fungerar. Video-demonstrationen bör vara max fem minuter lång.
+Inlämning
+Uppgiften kommer att betygsättas med Godkänd(G) eller Underkänd med möjlighet till komplettering(Fx).
+Att lämna in (som kommentar):
+•	Länk till din publicerade laboration alternativt länk till din video-demonstration.
+•	Länk till ditt publicerad, publikt Github-repo (glöm ej att göra en README-fil med beskrivning av lösningen).
+
