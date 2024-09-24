@@ -1,4 +1,4 @@
-/**
+/*
  * Kurslista
  * Av Mikaela Frendin
  */
@@ -107,7 +107,7 @@ app.get("/delete/:id", (req, res) => {
 
 });
 
-//Ändra kurs
+//hämta ändra kurs sida
 app.get("/edit/:id", (req, res)  => {
   let id = req.params.id;
 
@@ -123,7 +123,7 @@ app.get("/edit/:id", (req, res)  => {
     });
   });
 });
-
+//Ändra kurs
 app.post("/edit/:id", (req, res)  => {
   let id = req.params.id;
   let name = req.body.name;
@@ -131,7 +131,7 @@ app.post("/edit/:id", (req, res)  => {
   let progression = req.body.progression;
   let syllabus = req.body.syllabus;
   let error = "";
-
+  //kontroll input
   if(name != "" && code != "" && progression != "" && syllabus != "") {
     const stmt = db.prepare('UPDATE coursers SET name=?, code=?, progression=?, syllabus=? WHERE id=?');
     stmt.run(name, code, progression, syllabus, id);

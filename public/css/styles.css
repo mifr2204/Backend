@@ -1,3 +1,4 @@
+/*Allmänt*/
 body{
     background-color: grey;
     font-size: 2em;
@@ -21,6 +22,7 @@ h2{
     margin-left: auto;
     margin-right: auto;
 }
+/*Nav-bar*/
 nav {
     background-color: rgb(226, 223, 223);
 }
@@ -42,20 +44,35 @@ nav ul li:hover {
 }
 nav ul li.active {
     background-color: #b1cfb9;
-
 }
+/*Allmänt nav och ul*/
 nav a {
     text-decoration: none;
     min-width: 100px;
     display: block;
     color: black;
 }
-
+ul{
+    padding-left: 0;
+}
+/*Nav crumbs*/
+nav ol{
+    display: flex;
+    background-color: white;
+}
+nav ol li{
+    list-style: none;
+    margin-right: 20px;
+    font-size: 25px;
+}
+nav ol li a{
+    text-decoration: underline;
+}
+/*Listning av kurser*/
 #index ul li {
     list-style: none;
 }
 .course {
-    
     border-bottom: 1px solid black;
 }
 .lidiv ul{
@@ -63,9 +80,6 @@ nav a {
 }
 .cHead{
    min-width: 250px;
-}
-ul{
-    padding-left: 0;
 }
 .cLinks ul{
     display: flex;
@@ -81,23 +95,12 @@ ul{
 #coursehead{
     padding: 0;
 }
+/*forms*/
 input{
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
     font-size: 25px;
-}
-nav ol{
-    display: flex;
-    background-color: white;
-}
-nav ol li{
-    list-style: none;
-    margin-right: 20px;
-    font-size: 25px;
-}
-nav ol li a{
-    text-decoration: underline;
 }
 .addbtn, .editbtn{
     width: 250px;
@@ -112,6 +115,7 @@ nav ol li a{
     color: white;
     background-color: darkgreen;
 }
+
 @media only screen and (max-width: 700px) {
     h1{
         font-size: 1.4em;

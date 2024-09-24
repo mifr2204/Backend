@@ -1,5 +1,4 @@
 //Anslutning för Sqlite
-
 const sqlite3 = require("sqlite3").verbose();
 //Skapa databas
 const db = new sqlite3.Database("./db/courses.db");
@@ -42,17 +41,3 @@ stmt.run("Självständigt arbete", "DT140G", "B", "https://www.miun.se/utbildnin
 stmt.finalize();
 
 db.close();
-/*
-db.run(
-    `CREATE TABLE IF NOT EXISTS coursers (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        code TEXT NOT NULL,
-        progression TEXT NOT NULL,
-        syllabus TEXT NOT NULL,
-        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-    );`
-);
-
-db.close();
-*/

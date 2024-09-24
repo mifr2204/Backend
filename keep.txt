@@ -103,3 +103,18 @@ app.listen(3000);
 */
 
 //npm run dev känner av ändringar osv 
+
+/*
+db.run(
+    `CREATE TABLE IF NOT EXISTS coursers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        code TEXT NOT NULL,
+        progression TEXT NOT NULL,
+        syllabus TEXT NOT NULL,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );`
+);
+
+db.close();
+*/
