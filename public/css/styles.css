@@ -5,20 +5,149 @@ body{
     line-height: 1.5em;
 }
 main {
-    max-width: 900px;
     background-color: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    padding: 3rem 5rem;
+}
+h1{
+    font-size: 2em;
+}
+h2{
+    font-size: 1em;
+}
+#cont {
+    display: block;
+    max-width: 1400px; 
     margin-left: auto;
     margin-right: auto;
-    padding: 15px;
+}
+nav {
+    background-color: rgb(226, 223, 223);
+}
+nav ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+    width: 115px;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 17px; 
+}
+nav ul li:hover {
+    background-color: #c6d8cb;
     box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
-input{
-    width: 80%;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+nav ul li.active {
+    background-color: #b1cfb9;
+
+}
+nav a {
+    text-decoration: none;
+    min-width: 100px;
+    display: block;
+    color: black;
 }
 
+#index ul li {
+    list-style: none;
+}
+.course {
+    
+    border-bottom: 1px solid black;
+}
+.lidiv ul{
+    display: flex;
+}
+.cHead{
+   min-width: 250px;
+}
+ul{
+    padding-left: 0;
+}
+.cLinks ul{
+    display: flex;
+    font-size: 25px;
+}
+.cLinks li{
+    margin-right: 30px;
+    margin-top: 10px;
+}
+.b{
+    font-weight: 600;
+}
+#coursehead{
+    padding: 0;
+}
+input{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+nav ol{
+    display: flex;
+    background-color: white;
+}
+nav ol li{
+    list-style: none;
+    margin-right: 20px;
+    font-size: 25px;
+}
+nav ol li a{
+    text-decoration: underline;
+}
+.addbtn, .editbtn{
+    width: 250px;
+    margin-top: 30px;
+    font-size: 2rem;  
+}
 .error{
-    color: red;
+    color: white;
+    background-color: darkred;
+}
+.message{
+    color: white;
+    background-color: darkgreen;
+}
+@media only screen and (max-width: 700px) {
+    h1{
+        font-size: 1.4em;
+    }
+    h2{
+        font-size: 0.8em;
+    }
+    p{
+        font-size: 0.7em;
+    }
+    #index {
+        padding: 0.5rem 1rem;
+    }
+    #add, #edit{
+        padding-right: 3rem;
+        padding-left: 0.5rem;
+    }
+    .course{
+        font-size: 0.6em;
+    }
+    .cLinks ul{
+        font-size: 1em;
+    }
+    body{
+        line-height: 1em;
+    }
+    .cHead{
+        min-width: 130px;
+    }
+}
+@media only screen and (max-width: 410px) {
+    nav ul li {
+        width: 100px;
+        padding: 5px 5px; 
+    }
+    h1{
+        font-size: 1.1em;
+    }
 }

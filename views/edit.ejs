@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/styles.css">
+        <title>Ändra kurs</title>
+    </head>
+
+    <body>
+        <div id="cont">
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="/">Kurser</a></li>
+                        <li><a href="/add">Ny kurs</a></li>
+                        <li><a href="/about">Om</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main id="edit">
+                <nav>
+                    <ol>
+                        <li><a href="/">Kurser</a></li>
+                        <li>></li>
+                        <li><a>Ändra kurs</a></li>
+                    </ol>
+                </nav>
+                <h1>Ändra Kurs</h1>
+                
+                <form method="post">
+                
+                    <% if(error != ""){ %>
+                        <p class="error"><%= error %></p>
+                    <% }; %>
+                
+                    <label for="name">Kursnamn:</label><br>
+                    <input type="text" id="name" name="name" value="<%= row.name %>"><br>
+
+                    <label for="code">Kurskod:</label><br>
+                    <input type="text" id="code" name="code" value="<%= row.code %>"><br>
+
+                    <label for="progression">Progression:</label><br>
+                    <input type="text" id="progression" name="progression" value="<%= row.progression %>"><br>
+
+                    <label for="name">Syllabus:</label><br>
+                    <input type="url" id="syllabus" name="syllabus" value="<%= row.syllabus %>"><br>
+                    
+                    <input type="submit" class="addbtn" value="Ändra kurs">
+            
+                </form>
+
+            </main>
+        </div>
+    </body>
+</html>

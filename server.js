@@ -17,62 +17,149 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Routing
+//Routing index
 app.get('/', (req, res) => {
-  //const coursers = ["jaws", "dfsf"];
-  res.render('index', {
-    error: ""
+  //lista kurser
+  db.all("SELECT * FROM coursers;", (err, rows) => {
+    if(err) {
+      console.error(err.message);
+    }
+
+    res.render("index", {
+      error: "",
+      rows: rows
+    });
+
   });
 });
 
+//Routing add
+app.get('/add', (req, res) => {
+
+  res.render("add", {
+    error: "",
+    message: "",
+  });
+
+});
+
+//Routing about
+app.get('/about', (req, res) => {
+
+  res.render("about", {
+    error: "",
+  });
+
+});
+
+//Routing edit
+app.get('/edit', (req, res) => {
+
+  res.render("edit", {
+    error: "",
+  });
+
+});
+
 //skapa ny kurs
-app.post("/", (req, res) => {
+app.post("/add", (req, res) => {
+  let name = req.body.name;
+  let code = req.body.code;
+  let progression = req.body.progression;
+  let syllabus = req.body.syllabus;
+  let error = "";
+  let message = "";
+
+  //Kontroll av input ny kurs
+  if(name != "" && code != "" && progression != "" && syllabus != "") {
+    const stmt = db.prepare('INSERT INTO coursers(name, code, progression, syllabus) VALUES(?,?,?,?);');
+    stmt.run(name, code, progression, syllabus);
+    stmt.finalize();
+    message = "Kursen är tillagd";
+    res.render("add", {
+      message: message,
+      error: "",
+    });
+  }else{
+    error = "Alla fält måste fyllas i!";
+  }
+  
+  res.render("add", {
+    error: error,
+    message: "",
+  });
+
+});
+
+//Ta bort kurs
+app.get("/delete/:id", (req, res) => {
+  let id = req.params.id;
+
+  //ta bort kurs från databasen
+  db.run("DELETE FROM coursers WHERE ID=?;", id, (err) => {
+    if(err) {
+      console.error(err.message);
+    }
+
+    //skicka till startsidan
+    res.redirect("/");
+  });
+
+});
+
+//Ändra kurs
+app.get("/edit/:id", (req, res)  => {
+  let id = req.params.id;
+
+  //Hämta kurs i databasen
+  db.get("SELECT * FROM coursers WHERE ID=?;", id, (err, row) => {
+    if(err) {
+      console.error(err.message);
+    }
+    //visa edit sidan
+    res.render("edit", {
+      row: row,
+      error: ""
+    });
+  });
+});
+
+app.post("/edit/:id", (req, res)  => {
+  let id = req.params.id;
   let name = req.body.name;
   let code = req.body.code;
   let progression = req.body.progression;
   let syllabus = req.body.syllabus;
   let error = "";
 
-  //Kontroll
-
   if(name != "" && code != "" && progression != "" && syllabus != "") {
-    
+    const stmt = db.prepare('UPDATE coursers SET name=?, code=?, progression=?, syllabus=? WHERE id=?');
+    stmt.run(name, code, progression, syllabus, id);
+    stmt.finalize();
+    res.redirect("/");
   }else{
-    error = "Alla fält måste fyllas i";
+    error = "Alla fält måste vara ifyllda, försök igen";
   }
-
-  res.render("index", {
+  
+//Hämta kurs i databasen
+db.get("SELECT * FROM coursers WHERE ID=?;", id, (err, row) => {
+  if(err) {
+    console.error(err.message);
+  }
+  //visa edit sidan
+  res.render("edit", {
+    row: row,
     error: error
   });
-
 });
-
+    
+});
 //Start av applikationen
 app.listen(port, () => {
   console.log("Started on port: " + port);
 })
 
-//prepared statements som ökar säkerheten
-const stmt = db.prepare('INSERT INTO coursers(name, code, progression, syllabus) VALUES(?,?,?,?);');
 
-stmt.run("Webbutveckling I", "DT057G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT057G/");
-stmt.run("Introduktion till programmering i JavaScript", "DT084G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT084G/");
-stmt.run("Grafisk teknik för webb", "DT200G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT200G/");
-stmt.run("Webbanvändbarhet", "DT068G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT068G/");
-stmt.run("Databaser", "DT003G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT003G/");
-stmt.run("Frontend-baserad webbutveckling", "DT211G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT211G/");
-stmt.run("Backend-baserad webbutveckling", "DT207G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT207G/");
-stmt.run("Programmering i TypeScript", "DT208G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT208G/");
-stmt.run("Projektledning", "IK060G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/IK060G/");
-stmt.run("Programmering i C#.NET", "DT071G", "A", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT071G/");
-stmt.run("Fullstack-utveckling med ramverk", "DT193G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT193G/");
-stmt.run("Webbutveckling för WordPress", "DT209G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT209G/");
-stmt.run("Webbutveckling med .NET", "DT191G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT191G/");
-stmt.run("Fördjupad frontend-utveckling", "DT210G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT210G/");
-stmt.run("Självständigt arbete", "DT140G", "B", "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT140G/");
-stmt.finalize();
-
-db.close();
 
 
 

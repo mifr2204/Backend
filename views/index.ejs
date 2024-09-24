@@ -1,33 +1,64 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Kurser</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Kurser</title>
+    </head>
 
-<body>
-    <main id="index">
-        <h1>Kurser</h1>
-        <form method="post">
-            <% if(error != ""){ %>
-                <p class="error"><%= error %></p>
-            <% } %>
-            <label for="name">Kursnamn:</label><br>
-            <input type="text" id="name" name="name"><br>
-
-            <label for="code">Kurskod:</label><br>
-            <input type="text" id="code" name="code"><br>
-
-            <label for="progression">Progression:</label><br>
-            <input type="text" id="Progression" name="Progression"><br>
-
-            <label for="name">syllabus:</label><br>
-            <input type="text" id="syllabus" name="syllabus"><br>
-            
-            <input type="submit" value="Lägg till kurs">
-        </form>
-    </main>
-</body>
+    <body>
+        <div id="cont">
+            <header>
+                <nav>
+                    <ul>
+                        <li class="active"><a href="/">Kurser</a></li>
+                        <li><a href="/add">Ny kurs</a></li>
+                        <li><a href="/about">Om</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <main id="index">
+                <h1>Kurser</h1>
+                    <% if(locals.rows.length >0) { %>
+                        <% locals.rows.forEach((row) => { %>  
+                  
+                        <ul class="course">
+                            <li class="lidiv">
+                                <ul>
+                                    <li class="cHead">Kursnamn</li>
+                                    <li class="b"> <%= row.name%> </li>
+                                </ul>
+                            </li>
+                            <li class="lidiv">
+                                <ul>
+                                    <li class="cHead">Syllabus</li>
+                                    <li><a href=" <%= row.syllabus%>">Länk till Kursplan</a></li>
+                                </ul>
+                            </li>
+                            <li class="lidiv">
+                                <ul>
+                                    <li class="cHead">Kurskod</li>
+                                    <li> <%= row.code%> </li>
+                                </ul>
+                            </li>
+                            <li class="lidiv">
+                                <ul>
+                                    <li class="cHead">Progression</li>
+                                    <li> <%= row.progression%> </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="cLinks">
+                                <ul>
+                                    <li><a href="/delete/<%= row.id %>">Ta bort kurs</a></li>
+                                    <li><a href="/edit/<%= row.id %>">Ändra kurs</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <% }) %>        
+                <% } %>
+            </main>
+        </div>
+    </body>
 </html>

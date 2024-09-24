@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Lägg till kurs</title>
-</head>
-<body>
-    <main id="add">
-        <h1>Lägg till kurs</h1>
-        <form method="post">
-            <label for="name">Kursnamn:</label><br>
-            <input type="text" id="name" name="name"><br>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Lägg till kurs</title>
+    </head>
+    <body>
+        <div id="cont">
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="/">Kurser</a></li>
+                        <li class="active"><a href="/add">Ny kurs</a></li>
+                        <li><a href="/about">Om</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-            <label for="code">Kurskod:</label><br>
-            <input type="text" id="code" name="code"><br>
+            <main id="add">
+                <h1>Lägg till kurs</h1>
+                <form method="post">
+                    <% if(error != ""){ %>
+                        <p class="error"><%= error %></p>
+                    <% }; %>
+                    <% if(message != ""){ %>
+                        <p class="message"><%= message %></p>
+                    <% }; %>
+                    <label for="name">Kursnamn:</label><br>
+                    <input type="text" id="name" name="name"><br>
 
-            <label for="progression">Progression:</label><br>
-            <input type="text" id="Progression" name="Progression"><br>
+                    <label for="code">Kurskod:</label><br>
+                    <input type="text" id="code" name="code"><br>
 
-            <label for="name">syllabus:</label><br>
-            <input type="text" id="syllabus" name="syllabus"><br>
-            
-            <input type="submit" value="Lägg till kurs">
-        </form>
-    </main>
-</body>
+                    <label for="progression">Progression:</label><br>
+                    <input type="text" id="progression" name="progression"><br>
+
+                    <label for="name">Syllabus:</label><br>
+                    <input type="url" id="syllabus" name="syllabus" ><br>
+                    
+                    <input class="addbtn" type="submit" value="Lägg till kurs">
+                </form>
+            </main>
+        </div>
+    </body>
 </html>
