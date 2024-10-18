@@ -1,7 +1,7 @@
 //Anslutning för Sqlite
 const sqlite3 = require("sqlite3").verbose();
 //Skapa databas
-const db = new sqlite3.Database("./db/courses.db");
+const db = new sqlite3.Database("./db/coursers.db");
 //kör flera kommandon i ordning
 db.serialize(() => {
     db.run(

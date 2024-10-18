@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
 
 //Anslutning till databasen
-const db = new sqlite3.Database("./db/courses.db");
+const db = new sqlite3.Database("./db/coursers.db");
 
 //inställningar för databasen
 const app = express();
@@ -61,6 +61,8 @@ app.get('/edit', (req, res) => {
 
 });
 
+
+
 //skapa ny kurs
 app.post("/add", (req, res) => {
   let name = req.body.name;
@@ -96,7 +98,7 @@ app.get("/delete/:id", (req, res) => {
   let id = req.params.id;
 
   //ta bort kurs från databasen
-  db.run("DELETE FROM coursers WHERE ID=?;", id, (err) => {
+  db.run("DELETE FROM coursers WHERE id=?;", id, (err) => {
     if(err) {
       console.error(err.message);
     }
@@ -107,12 +109,13 @@ app.get("/delete/:id", (req, res) => {
 
 });
 
+
 //hämta ändra kurs sida
 app.get("/edit/:id", (req, res)  => {
   let id = req.params.id;
 
   //Hämta kurs i databasen
-  db.get("SELECT * FROM coursers WHERE ID=?;", id, (err, row) => {
+  db.get("SELECT * FROM coursers WHERE id=?;", id, (err, row) => {
     if(err) {
       console.error(err.message);
     }
@@ -123,6 +126,8 @@ app.get("/edit/:id", (req, res)  => {
     });
   });
 });
+
+
 //Ändra kurs
 app.post("/edit/:id", (req, res)  => {
   let id = req.params.id;
@@ -131,9 +136,10 @@ app.post("/edit/:id", (req, res)  => {
   let progression = req.body.progression;
   let syllabus = req.body.syllabus;
   let error = "";
+
   //kontroll input
   if(name != "" && code != "" && progression != "" && syllabus != "") {
-    const stmt = db.prepare('UPDATE coursers SET name=?, code=?, progression=?, syllabus=? WHERE id=?');
+    const stmt = db.prepare('UPDATE coursers SET name=?, code=?, progression=?, syllabus=? WHERE id=?;');
     stmt.run(name, code, progression, syllabus, id);
     stmt.finalize();
     res.redirect("/");
@@ -141,52 +147,10 @@ app.post("/edit/:id", (req, res)  => {
     error = "Alla fält måste vara ifyllda, försök igen";
   }
   
-//Hämta kurs i databasen
-db.get("SELECT * FROM coursers WHERE ID=?;", id, (err, row) => {
-  if(err) {
-    console.error(err.message);
-  }
-  //visa edit sidan
-  res.render("edit", {
-    row: row,
-    error: error
-  });
 });
-    
-});
+
 //Start av applikationen
 app.listen(port, () => {
   console.log("Started on port: " + port);
 })
-
-
-
-
-
-/*
-const port = 3000;
-
-
-
-
-app.get('/', (req, res) => {
-  //const coursers = ["jaws", "dfsf"];
-  res.render('index', {
-    coursers : coursers,
-    title : "Startsida"
-  });
-});
-//res.render('index', { 
- // coursers : coursers });
-
-
-app.get('/about', (req, res) => {
-  const movies = ["jaws", "dfsf"];
-  
-  res.render('about', { 
-    movies : movies });
-});
-
-
-*/
 
